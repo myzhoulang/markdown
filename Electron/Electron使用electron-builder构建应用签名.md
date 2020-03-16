@@ -49,5 +49,7 @@
 
          在[electron-builder](https://github.com/electron-userland/electron-builder)/[packages](https://github.com/electron-userland/electron-builder/tree/master/packages)/[app-builder-lib](https://github.com/electron-userland/electron-builder/tree/master/packages/app-builder-lib)/[src](https://github.com/electron-userland/electron-builder/tree/master/packages/app-builder-lib/src)/[codeSign](https://github.com/electron-userland/electron-builder/tree/master/packages/app-builder-lib/src/codeSign)/[windowsCodeSign.ts](https://github.com/electron-userland/electron-builder/blob/master/packages/app-builder-lib/src/codeSign/windowsCodeSign.ts#L199)文件有判断。
 
+         `rfc3161TimeStampServer`服务器地址`http://tsa.wotrus.com` 暂时可用(2020-03-16);
          
+         ![](Sentry%20Docker%20%E6%90%AD%E5%BB%BA/53396589-B29A-40E8-AF11-637EED047BA8.png)
 
