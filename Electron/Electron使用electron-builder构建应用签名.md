@@ -27,6 +27,10 @@
        
        ```
 
+    2. 生产环境中
+       > Mac购买开发者证书， windows可以在赛门铁克、WoSign等证书提供商购买证书。
+       
+    
   * `electron-builder`签名的时候，会到远程的服务器获取一个时间。所以需要有外网环境。
 
 
@@ -51,5 +55,5 @@
 
          `rfc3161TimeStampServer`服务器地址`http://tsa.wotrus.com` 暂时可用(2020-03-16);
          
-         ![](Sentry%20Docker%20%E6%90%AD%E5%BB%BA/53396589-B29A-40E8-AF11-637EED047BA8.png)
+         ![](Electron使用electron-builder构建应用签名/1.png)
 
