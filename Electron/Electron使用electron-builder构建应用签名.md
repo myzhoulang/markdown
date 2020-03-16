@@ -55,5 +55,8 @@
 
          `rfc3161TimeStampServer`服务器地址`http://tsa.wotrus.com` 暂时可用(2020-03-16);
          
+         构建成功：
          ![](Electron使用electron-builder构建应用签名/1.png)
 
+         在应用程序启动应用程序的属性中可以看到数字签名一栏：
+         ![](Electron使用electron-builder构建应用签名/2.png)
