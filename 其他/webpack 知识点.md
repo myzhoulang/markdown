@@ -254,4 +254,6 @@
   1. `HotModuleReplacementPlugin`的作用?
   2. 热更新原理
 
-* 
+* `Hash` 、`Chunkhash`、 `Contenthash` 什么时候会改变和使用场景
+
+* 代码压缩
