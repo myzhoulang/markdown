@@ -11,7 +11,7 @@
     mode: 'production',				// 构建的环境
     module: {		
       // 规则 使用loader处理匹配到的文件
-      rules: [{test: /\.txt$/, use: 'raw-loader'}] 
+      rules: [{test: /\.txt$/, use: 'raw-loader'}]
     },
     plugins: [ // 插件 处理 loader 完成后的东西， 如压缩 文件指纹，将文件插入到html中
       new HtmlwebpackPlugin({
@@ -182,3 +182,76 @@
   ```
 
   
+
+* 文件监听
+
+  > 监听源代码，自动重新构建。有两种方式可以配置。
+  >
+  > 在`webpack.config.js`中配置`watch`属性。还可以配置`watchOptions`选项。
+
+  ```js
+  module.export = {
+      watch: true,
+      // 配合 watch 使用， 只有 watch: true 时才生效
+      watchOptions: {
+          // 不需要监听的文件或文件夹 默认为空
+          ignored: /node_modules/,
+          // 监听到变化后等待多长时间采取执行 默认 300ms
+          // 在这个时间段更改的文件将会被合并成一次执行
+          aggregateTimeout:300,
+          // 检测文件变动的频率 默认每秒检测一次 单位ms
+          poll: 1000
+      }
+  }
+  ```
+
+  
+
+  1. `webpack` 启动命令时，带上 `--watch` 参数。
+  2. 在`webpack.config.js`中设置`watch`属性为`true`。
+
+* 热更新
+
+  > 使用`webpack-dev-server`和`HotModuleReplacementPlugin`插件实现热更新.
+  >
+  > `webpack-dev-server` 会启动一个资源服务器.
+  >
+  > 它能观测文件变化执行编译过程, 而且它是不输出文件到磁盘,而是写入内存.
+  >
+  > 并且还可以自动刷新浏览器.
+  >
+  > `HotModuleReplacementPlugin`
+
+  `package.json`
+
+  ```json
+  
+  {
+      "dev": "webpack-dev-server --open"
+  }
+  ```
+
+  
+
+  ```js
+  // 引入 webpack HotModuleReplacementPlugin 插件时在 webpack 里面.
+  const webpack = require('webpack');
+  module.export = {
+      plugins: [
+          // 在devServer 中指定 hot 为 true时, 可以不用添加以下插件
+          // https://www.webpackjs.com/configuration/dev-server/#devserver-hot
+          new webpack.HotModuleReplacementPlugin()
+      ],
+      devServer: {
+          contentBase: './dist', 	// 指定启动服务的根目录
+          hot: true				// 开启热更新
+      }
+  }
+  ```
+
+  问: 
+
+  1. `HotModuleReplacementPlugin`的作用?
+  2. 热更新原理
+
+* 
