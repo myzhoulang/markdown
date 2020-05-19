@@ -4,22 +4,21 @@
 
 ```yaml
 {
- 	# 邮箱配置
-	SENTRY_EMAIL_HOST: smtp
-	SENTRY_EMAIL_HOST: ‘smtp.qq.com’
-	SENTRY_EMAIL_USER: ‘604389771@qq.com’
-	SENTRY_EMAIL_PASSWORD: ‘xxxxx’   # 邮箱授权码
-	SENTRY_SERVER_EMAIL: ‘604389771@qq.com’
-	SENTRY_EMAIL_PORT: 587        # 阿里云必须写这一项
-	SENTRY_EMAIL_USE_TLS: ‘true’   # 阿里云必须写这一项
+  SENTRY_EMAIL_HOST: smtp
+  SENTRY_EMAIL_HOST: ‘smtp.qq.com’
+  SENTRY_EMAIL_USER: ‘604389771@qq.com’
+  SENTRY_EMAIL_PASSWORD: ‘xxxxx’   # 邮箱授权码
+  SENTRY_SERVER_EMAIL: ‘604389771@qq.com’
+  SENTRY_EMAIL_PORT: 587        # 阿里云必须写这一项
+  SENTRY_EMAIL_USE_TLS: ‘true’   # 阿里云必须写这一项
 }
 ```
 
 2. 执行完成后 重新构建和重启
 
 ```shell
-docker-compose build
-docker-compose up -d
+$ docker-compose build
+$ docker-compose up -d
 ```
 
 3. 重新登录后找到 用户管理 > 邮件 进行查看，可以点击 发送测试邮件测试。
