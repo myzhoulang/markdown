@@ -16,7 +16,7 @@
 
 2. 执行完成后 重新构建和重启
 
-```shell
+```bash
 $ docker-compose build
 $ docker-compose up -d
 ```
