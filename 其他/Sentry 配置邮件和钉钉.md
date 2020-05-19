@@ -17,9 +17,9 @@
 
 2. 执行完成后 重新构建和重启
 
-```shell
-docker-compose build
-docker-compose up -d
+```bash
+$ docker-compose build
+$ docker-compose up -d
 ```
 
 3. 重新登录后找到 用户管理 > 邮件 进行查看，可以点击 发送测试邮件测试。
