@@ -4,14 +4,13 @@
 
 ```yaml
 {
- 	# 邮箱配置
-	SENTRY_EMAIL_HOST: smtp
-	SENTRY_EMAIL_HOST: ‘smtp.qq.com’
-	SENTRY_EMAIL_USER: ‘604389771@qq.com’
-	SENTRY_EMAIL_PASSWORD: ‘xxxxx’   # 邮箱授权码
-	SENTRY_SERVER_EMAIL: ‘604389771@qq.com’
-	SENTRY_EMAIL_PORT: 587        # 阿里云必须写这一项
-	SENTRY_EMAIL_USE_TLS: ‘true’   # 阿里云必须写这一项
+  SENTRY_EMAIL_HOST: smtp
+  SENTRY_EMAIL_HOST: ‘smtp.qq.com’
+  SENTRY_EMAIL_USER: ‘604389771@qq.com’
+  SENTRY_EMAIL_PASSWORD: ‘xxxxx’   # 邮箱授权码
+  SENTRY_SERVER_EMAIL: ‘604389771@qq.com’
+  SENTRY_EMAIL_PORT: 587        # 阿里云必须写这一项
+  SENTRY_EMAIL_USE_TLS: ‘true’   # 阿里云必须写这一项
 }
 ```
 
