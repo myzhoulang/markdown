@@ -82,7 +82,3 @@
 	end $$ language plpgsql;
 ```
 
-```
-
-```
-#Docker  #Sentry
