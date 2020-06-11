@@ -79,7 +79,7 @@
 
   
 
-  ```json
+  ```javascript
   // .babelrc
   {
     "presets": [
