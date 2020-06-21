@@ -37,7 +37,7 @@
 * 在每次修改代码后需要发包的时候 ，需要修改版本号。可以使用 `npm version` 命令
 
   ```bash
-  npm version 
+  npm version
   ```
 
   
