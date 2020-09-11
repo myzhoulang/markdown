@@ -256,4 +256,212 @@
 
 * `Hash` 、`Chunkhash`、 `Contenthash` 什么时候会改变和使用场景
 
+  > `webpack`中所有的`hash`的值是一样的，只要文件有任何变化，下次构建生成的`hash`就会改变。如果使用`hash`作为文件指纹。当某一个文件发生改变，其他未任何修改的文件指纹都会改变，这样就没有缓存了。
+  >
+  > `Chunkhash`是一个`chunk`的`hash`,一个或多个模块产生一个`chunk`,每一个`chunkhash`都是不一样的。`chunk`中的任何一个模块发生改变，`Chunkhash`就会发生变化。
+  >
+  > `Contenthash`是具体一个模块的`hash`，一个`chunk`中可能有各种类型的模块，如`css`、图片、`js`，他们的加载方式是分开的。当某一类型的模块发生改变，如果使用`chunkhash`,其他未修改的模块的`hash`就会发生变化，这样就达不到缓存效果
+  >
+  > * **`file-loader`中的 `[hash]`占位符是文件内容的`hash`，默认md5生成**
+
+  
+
 * 代码压缩
+
+> `js`在`mode`设置成`production`的时候会自动采用`uglifyjs-webpack-plugin`插件压缩代码
+>
+> ```js
+> module.exports = {
+>   mode: "production"
+> }
+> ```
+>
+> 
+>
+> `css`文件可以采用第三方的`optimize-css-assets-webpack-plugin`插件压缩
+>
+> ```js
+> const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+> module.exports = {
+>   plugins: [
+>     new OptimizeCssAssetsWebpackPlugin({
+>       assetNameRegExp: /\.css$/g,
+>       cssProcessor: require("cssnano"),
+>     })
+>   ]
+> }
+> ```
+>
+> 
+>
+> `html`可以采用`html-wbepack-plugin`插件压缩,`html-wbepack-plugin`不仅可以压缩,还可以生成`html`文件，还可以将指定的`chunk`插入到`html`文件中。
+>
+> ```js
+> const HtmlWebpackPlugin = require("html-webpack-plugin")
+> module.exports = {
+>   plugins: [
+>     new HtmlWebpackPlugin({
+>       template: path.join(__dirname, "src/index.html"),
+>       filename: "index.html",
+>       chunks: ["index"],
+>       inject: true,
+>       minify: {
+>         html5: true,
+>         collapseWhitespace: true,
+>         preserveLineBreaks: false,
+>         minifyCSS: true,
+>         minifyJS: true,
+>         removeComments: false,
+>       },
+>     }),
+>   ]
+> }
+> ```
+>
+> 
+
+* 自动清理构建的目录
+
+  > 使用`clean-webpack-plugin`插件清除构建的目录
+  >
+  > ```js
+  > const { CleanWebpackPlugin }= require('clean-webpack-plugin')
+  > module.exports = {
+  >   plugins: [
+  >     new CleanWebpackPlugin()
+  >   ]
+  > }
+  > ```
+  >
+  > 
+
+* 使用`postcss-loader`和`autoprefixer`自动补全`css3`前缀
+
+> ```js
+> module.exports = {
+>   module: {
+>     rules: [
+>       {test: /\.less$/, use: [
+>         	"style-loader",
+>           "css-loader",
+>           "less-loader",
+>         {
+>           loader: "postcss-loader",
+>           plugins: () => [
+>             require("autoprefixer")({browsers: ["last 2 version"]})
+>           ]
+>         }
+>       ]}
+>     ]
+>   }
+> }
+> ```
+>
+> 或者在`package.json`中设置浏览器, 在`webpack.config.js`中直接使用
+>
+> ```json
+> {
+>   "browserslist": [
+>     "last 2 versions",
+>     "> 1%"
+>   ],
+> }
+> ```
+>
+> ```js
+> module.exports = {
+>   module: {
+>     rules: [
+>       {test: /\.less$/, use: [
+>         	"style-loader",
+>           "css-loader",
+>           "less-loader",
+>         {
+>           loader: "postcss-loader",
+>           options: {
+>             plugins: [require("autoprefixer")]
+>           }
+>         }
+>       ]}
+>     ]
+>   }
+> }
+> ```
+>
+> 
+
+* 使用`px2rem-loader`移动端 `px` 转 `rem`, 还需要使用 `lib-flexible`动态计算根节点的字体大小
+
+> ```js
+> module.exports = {
+>   module: {
+>     rules: [
+>       {test: /\.less$/, use: [
+>         	"style-loader",
+>           "css-loader",
+>           "less-loader",
+>         {
+>           loader: "postcss-loader",
+>           options: {
+>             plugins: [require("autoprefixer")]
+>           }
+>           
+>         },
+>         {
+>           loader: "px2rem-loader",
+>           options: {
+>             remUnit: 75,		//对应设计稿 1rem = 75
+>             remPrecesion: 8 
+>           }
+>         }
+>       ]},
+>     ]
+>   }
+> }
+> ```
+>
+> 
+
+
+
+* 使用`raw-loader`内联一些资源
+
+  > ```html
+  > <head>
+  >   <script><%= require('raw-loader!./node_module/lib-flexible/flexible') %></script>
+  > </head>
+  > ```
+  >
+  > 
+
+* 多页面打包
+
+  > 多页面打包首先需要在一个目录下根据一些规则创建目录，然后使用 `glob`库去读取这些目录，然后动态生成 `entry`和`htmlWebpackPlugin`。
+
+* 分离公共包
+
+  > 分离公共包有两种方式，一种是使用`html-webpack-externals-plugin`将公共包提取，一种使用`splitChunk`选项进行公共包提取
+  >
+  > * `html-webpack-externals-plugin`
+  >
+  >   ```js
+  >   module.exports = {
+  >     plugins: [
+  >       new HtmlWebpackExternalsPlugin({
+  >         
+  >       })
+  >     ]
+  >   }
+  >   ```
+
+* `Tree shaking`
+
+  > 1. `Tree shanking`是什么
+  >
+  >    `Tree shaking`（摇树优化）在打包构建过程中移除那些未引用的代码。从而减少打包后的文件大小。
+  >
+  > 2. `Tree shanking`原理
+  >
+  > 3.  如何开启`Tree shanking`
+  >
+  > 

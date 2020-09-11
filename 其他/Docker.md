@@ -10,6 +10,52 @@
 
 
 
+## 什么是`Docker`
+
+> `Docker`是一个开发、发布、运行应用程序的发布平台。它有三大核心：**镜像**、**容器**、**仓库**。 
+>
+> * 镜像是有文件和文件夹组成，包含了启动容器所需要的系统文件、应用程序的代码文件、程序运行的配置文件等，镜像是`Docker`运行的先决条件，容器都是基于镜像运行的。
+> * 容器是镜像的运行实体。运行着真正的应用程序，容器本质上就是主机上运行的一个进程，容器具有自己的独立命名空间隔离和资源限制，容器内部是无法访问主机或其他容器的任何信息或资源。
+> * 仓库是使用来存放和发布镜像的。仓库可分为共有仓库和私有仓库。
+
+## 镜像基本命令
+
+* 拉取镜像
+
+  > `docker pull`是从远程仓库拉取镜像到本地
+  >
+  > `docker pull nginx:latest`：从远程镜像仓库中拉取`latest`版本的`nginx`镜像
+
+* 查看本地镜像
+
+  > `docker images`：列出本地所有镜像
+  >
+  > `docker image ls nginx` 或者`docker images | grep nginx`：查看本地是否有`nginx`镜像
+
+* 删除本地镜像
+
+  > `docker image rm`： 从本地删除指定镜像
+  >
+  > `docker image rm nginx:latest`：删除本地`latest`版本的`nginx`镜像
+
+* 构建镜像
+
+  > 镜像的构建有两种方式
+  >
+  > 1. 基于已运行的容器提交为镜像
+  >
+  >    ```shell
+  >    $ docker commit busybox busybox:hello
+  >    ```
+  >
+  > 2. 基于`DockerFile`文件构建
+  >
+  >    ```shell
+  >    $ docker build -t mybusybox .
+  >    ```
+  >
+  >    
+
 ### Centos 安装 Docker 下常规安装
 1. 使用 `uname -r` 查看当前`Liunx`系统内核版本。*需要3.10及以上*。
 2. 使用`docker container logs [容器名]`查看对应的容器日志。
