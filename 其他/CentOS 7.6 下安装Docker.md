@@ -3,6 +3,7 @@
 ## 安装环境
 
 * Linux 系统内核 3.10 (使用 `uname -r`查看)
+* 
 * curl 文件传输工具 （没有curl 可使用 `yum -y install curl`）
 
 ## 步骤

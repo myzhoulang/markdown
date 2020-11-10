@@ -462,6 +462,14 @@
   >
   > 2. `Tree shanking`原理
   >
-  > 3.  如何开启`Tree shanking`
+  >    首先`webapck`要实现`Tree shankng`必须要使用`ESModule`模块的方式。因为`ESModule`是静态加载的。模块是否会被加载在构建的时候已经能被推导出来。`webapck`在`Tree shanking`过程中，首先会将那些没有被引用的代码进行标记。然后在压缩阶段对这些代码进行删除。
+  >
+  > 3. 如何开启`Tree shanking`
+  >
+  >    在`webpack`的`mode`选项为`production`就会默认开启了`Tree shanking`。在其他模式下也可以收开启，在`optimization`选项中将`userdExports`和`minimize`设为`true`,就会开启`Tree shanking`
   >
   > 
+
+* `scope hosting`
+
+  > 普通打包下，会将一个模块放到一个单独的函数中。如果模块越多，那么这样的函数就越多，打包后的体积也就越大，而且在代码执行时由于创建的函数作用域越多，内存开销也就变的越大。开启`scope hosting`后会尽可能的将这些模块合并到一个函数中。这样既减少了代码的体积，有提高了执行效率。

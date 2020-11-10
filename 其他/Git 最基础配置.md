@@ -29,7 +29,8 @@ git config --global user.email 'xxx@xx.xx'
 
 ```bash
 git config --local user.name 'xxx'
-git config --local user.email 'xxx@xx.xx'
+
+
 ```
 
 > 可以使用 `git config --list [--local| --system| --global]` 查看当前级别下的配置  

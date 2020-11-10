@@ -110,6 +110,10 @@
 	* search
 	* push
 	* tag
+	
+	```
+	SENTRY_IMAGE=getsentry/sentry: ./install.sh
+	```
 
 ```shell
 $ docker ps -aq						# 查看所有容器
@@ -127,3 +131,7 @@ $ docker rm $(docker ps -aq)			# 删除所有容器
 ```
 
 #Docker
+
+
+
+curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
